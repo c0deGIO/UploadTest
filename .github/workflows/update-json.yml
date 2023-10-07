@@ -1,0 +1,20 @@
+name: Update JSON
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Update JSON File
+        run: |
+          curl -X PUT -H "Authorization: Bearer ${{ secrets.TOKEN }}" \
+            -d '{"key": "new value"}' \
+            https://api.github.com/repos/yourusername/yourrepository/contents/data.json
